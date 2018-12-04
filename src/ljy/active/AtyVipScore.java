@@ -14,16 +14,16 @@ import com.alibaba.fastjson.JSON;
 import ljy.dao.DaoVip;
 
 /**
- * Servlet implementation class AtyGetvip
+ * Servlet implementation class AtyVipScore
  */
-@WebServlet("/AtyGetVip")
-public class AtyGetVip extends HttpServlet {
+@WebServlet("/AtyVipScore")
+public class AtyVipScore extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AtyGetVip() {
+    public AtyVipScore() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,11 +34,10 @@ public class AtyGetVip extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
-		String code = request.getParameter("code");
 		String name = request.getParameter("username");
-		Integer success = DaoVip.getVip(name, code);
+		Integer score = DaoVip.getVipScore(name);
 		HashMap<String, Integer> map = new HashMap<>();
-		map.put("success", success);
+		map.put("score", score);
 		response.getWriter().append(JSON.toJSONString(map));
 	}
 
