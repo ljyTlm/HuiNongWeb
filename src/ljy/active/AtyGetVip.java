@@ -33,6 +33,7 @@ public class AtyGetVip extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
 		String code = request.getParameter("code");
 		String name = request.getParameter("username");
 		Integer success = DaoGetVip.getVip(name, code);
