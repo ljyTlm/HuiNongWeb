@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- ä¸»æœº:                           127.0.0.1
--- æœåŠ¡å™¨ç‰ˆæœ¬:                        5.7.17-log - MySQL Community Server (GPL)
--- æœåŠ¡å™¨æ“ä½œç³»ç»Ÿ:                      Win64
--- HeidiSQL ç‰ˆæœ¬:                  8.2.0.4675
+-- Ö÷»ú:                           127.0.0.1
+-- ·şÎñÆ÷°æ±¾:                        5.7.17-log - MySQL Community Server (GPL)
+-- ·şÎñÆ÷²Ù×÷ÏµÍ³:                      Win64
+-- HeidiSQL °æ±¾:                  8.2.0.4675
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,30 +10,46 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- å¯¼å‡º huinong çš„æ•°æ®åº“ç»“æ„
+-- µ¼³ö huinong µÄÊı¾İ¿â½á¹¹
 CREATE DATABASE IF NOT EXISTS `huinong` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `huinong`;
 
 
--- å¯¼å‡º  è¡¨ huinong.feedback ç»“æ„
+-- µ¼³ö  ±í huinong.consumption ½á¹¹
+CREATE TABLE IF NOT EXISTS `consumption` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) NOT NULL DEFAULT '0',
+  `moey` varchar(50) NOT NULL DEFAULT '0',
+  `date` datetime NOT NULL,
+  `commodityid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ÕıÔÚµ¼³ö±í  huinong.consumption µÄÊı¾İ£º~0 rows (´óÔ¼)
+/*!40000 ALTER TABLE `consumption` DISABLE KEYS */;
+/*!40000 ALTER TABLE `consumption` ENABLE KEYS */;
+
+
+-- µ¼³ö  ±í huinong.feedback ½á¹¹
 CREATE TABLE IF NOT EXISTS `feedback` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
-  `time` varchar(50) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
+  `time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `text` varchar(500) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
--- æ­£åœ¨å¯¼å‡ºè¡¨  huinong.feedback çš„æ•°æ®ï¼š~1 rows (å¤§çº¦)
+-- ÕıÔÚµ¼³ö±í  huinong.feedback µÄÊı¾İ£º~2 rows (´óÔ¼)
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` (`id`, `name`, `time`, `title`, `text`, `status`) VALUES
-	(2, 'æé‡‘ç‰', '2018-12-4-14-42', 'appå­˜åœ¨bug', 'ä¾§è¾¹æ æœåŠ¡ä¸ºå¼€æ”¾', 0);
+INSERT INTO `feedback` (`id`, `name`, `title`, `time`, `text`, `status`) VALUES
+	(2, 'Àî½ğÓñ', 'app´æÔÚbug', '2018-12-06 19:15:38', '²à±ßÀ¸·şÎñÎª¿ª·Å', 0),
+	(7, 'Àî½ğÓñ', 'ÎÒÔÚ¶Ô·´À¡½øĞĞ²âÊÔ', '2018-12-06 19:22:49', 'ÎÒ¶Ô·´À¡½øĞĞÁË²âÊÔ', 0);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 
 
--- å¯¼å‡º  è¡¨ huinong.gift ç»“æ„
+-- µ¼³ö  ±í huinong.gift ½á¹¹
 CREATE TABLE IF NOT EXISTS `gift` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `imgurl` varchar(50) NOT NULL DEFAULT '0',
@@ -43,58 +59,59 @@ CREATE TABLE IF NOT EXISTS `gift` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
--- æ­£åœ¨å¯¼å‡ºè¡¨  huinong.gift çš„æ•°æ®ï¼š~2 rows (å¤§çº¦)
+-- ÕıÔÚµ¼³ö±í  huinong.gift µÄÊı¾İ£º~2 rows (´óÔ¼)
 /*!40000 ALTER TABLE `gift` DISABLE KEYS */;
 INSERT INTO `gift` (`id`, `imgurl`, `name`, `score`, `num`) VALUES
-	(1, 'riceCoker.png', 'ç”µé¥­é”…', 100, 7),
-	(2, 'bedThree.png', 'åºŠä¸Šä¸‰ä»¶å¥—', 200, 19),
-	(3, 'xiaomi.png', 'å°ç±³æ‰‹æœº', 999999, 1);
+	(1, 'riceCoker.png', 'µç·¹¹ø', 100, 7),
+	(2, 'bedThree.png', '´²ÉÏÈı¼şÌ×', 200, 19),
+	(3, 'xiaomi.png', 'Ğ¡Ã×ÊÖ»ú', 999999, 1);
 /*!40000 ALTER TABLE `gift` ENABLE KEYS */;
 
 
--- å¯¼å‡º  è¡¨ huinong.news ç»“æ„
+-- µ¼³ö  ±í huinong.news ½á¹¹
 CREATE TABLE IF NOT EXISTS `news` (
   `imgname` varchar(50) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
   `url` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=gbk;
 
--- æ­£åœ¨å¯¼å‡ºè¡¨  huinong.news çš„æ•°æ®ï¼š~8 rows (å¤§çº¦)
+-- ÕıÔÚµ¼³ö±í  huinong.news µÄÊı¾İ£º~8 rows (´óÔ¼)
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
 INSERT INTO `news` (`imgname`, `title`, `url`) VALUES
-	('iconnews', 'æƒå¨è§£è¯»ä¹¡æ‘æŒ¯å…´æˆ˜ç•¥é¦–ä¸ªäº”å¹´è§„åˆ’äº®ç‚¹', 'http://nxt.nongmintv.com/show.php?itemid=31779'),
-	('iconnews', 'æ‰¿å¾·æ‹–æ¬ å†œæ°‘å·¥å·¥èµ„ä¼ä¸šå°†ä¸Šâ€œé»‘åå•â€', 'http://nxt.nongmintv.com/show.php?itemid=31819'),
-	('iconnews', 'ç« ä¸˜â€œè‘±ç‹â€è¦åœ¨é˜¿é‡Œæ‹å– å¤©çŒ«åŒ11æˆå†œäº§å“æœ€ä½³å±•ç¤ºèˆå°', 'http://nxt.nongmintv.com/show.php?itemid=31806'),
-	('iconnews', '2019å¹´å°éº¦æœ€ä½æ”¶è´­ä»·æ¯æ–¤ä¸‹è°ƒ3åˆ†', 'http://nxt.nongmintv.com/show.php?itemid=31816'),
-	('iconnews', 'äº¬æ´¥å†€è”å®¡ç‰ç±³æ–°å“ç§åœ¨æ²³åŒ—ç»“ç¡•æœ', 'http://nxt.nongmintv.com/show.php?itemid=31815'),
-	('iconnews', 'æ¢å¯»2.3äº¿å¨è”¬èœç§¸ç§†çš„å‡ºè·¯', 'http://nxt.nongmintv.com/show.php?itemid=31810'),
-	('iconnews', 'æ²³åŒ—ï¼šæ‰¶è´«é¾™å¤´ä¼ä¸šåº”å¸¦åŠ¨è´«å›°æˆ·100æˆ·ä»¥ä¸Š', 'http://nxt.nongmintv.com/show.php?itemid=31805'),
-	('iconnews', 'è´«å›°åœ°åŒºå†œäº§å“æ»é”€å’‹åŠï¼Ÿ', 'http://nxt.nongmintv.com/show.php?itemid=31803');
+	('iconnews', 'È¨Íş½â¶ÁÏç´åÕñĞËÕ½ÂÔÊ×¸öÎåÄê¹æ»®ÁÁµã', 'http://nxt.nongmintv.com/show.php?itemid=31779'),
+	('iconnews', '³ĞµÂÍÏÇ·Å©Ãñ¹¤¹¤×ÊÆóÒµ½«ÉÏ¡°ºÚÃûµ¥¡±', 'http://nxt.nongmintv.com/show.php?itemid=31819'),
+	('iconnews', 'ÕÂÇğ¡°´ĞÍõ¡±ÒªÔÚ°¢ÀïÅÄÂô ÌìÃ¨Ë«11³ÉÅ©²úÆ·×î¼ÑÕ¹Ê¾ÎèÌ¨', 'http://nxt.nongmintv.com/show.php?itemid=31806'),
+	('iconnews', '2019ÄêĞ¡Âó×îµÍÊÕ¹º¼ÛÃ¿½ïÏÂµ÷3·Ö', 'http://nxt.nongmintv.com/show.php?itemid=31816'),
+	('iconnews', '¾©½ò¼½ÁªÉóÓñÃ×ĞÂÆ·ÖÖÔÚºÓ±±½áË¶¹û', 'http://nxt.nongmintv.com/show.php?itemid=31815'),
+	('iconnews', 'Ì½Ñ°2.3ÒÚ¶ÖÊß²Ë½Õ¸ÑµÄ³öÂ·', 'http://nxt.nongmintv.com/show.php?itemid=31810'),
+	('iconnews', 'ºÓ±±£º·öÆ¶ÁúÍ·ÆóÒµÓ¦´ø¶¯Æ¶À§»§100»§ÒÔÉÏ', 'http://nxt.nongmintv.com/show.php?itemid=31805'),
+	('iconnews', 'Æ¶À§µØÇøÅ©²úÆ·ÖÍÏúÕ¦°ì£¿', 'http://nxt.nongmintv.com/show.php?itemid=31803');
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 
 
--- å¯¼å‡º  è¡¨ huinong.user ç»“æ„
+-- µ¼³ö  ±í huinong.user ½á¹¹
 CREATE TABLE IF NOT EXISTS `user` (
   `name` varchar(50) DEFAULT NULL,
   `passwd` varchar(50) DEFAULT NULL,
   `vip` int(11) DEFAULT NULL,
-  `score` int(11) DEFAULT NULL
+  `score` int(11) DEFAULT NULL,
+  `money` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- æ­£åœ¨å¯¼å‡ºè¡¨  huinong.user çš„æ•°æ®ï¼š~2 rows (å¤§çº¦)
+-- ÕıÔÚµ¼³ö±í  huinong.user µÄÊı¾İ£º~2 rows (´óÔ¼)
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` (`name`, `passwd`, `vip`, `score`) VALUES
-	('ç½—ç¿”æ³½', '123456', 2, 500),
-	('æé‡‘ç‰', '123456', 2, 0);
+INSERT INTO `user` (`name`, `passwd`, `vip`, `score`, `money`) VALUES
+	('ÂŞÏèÔó', '123456', 2, 500, 100),
+	('Àî½ğÓñ', '123456', 2, 0, 200);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
 
--- å¯¼å‡º  è¡¨ huinong.vipcode ç»“æ„
+-- µ¼³ö  ±í huinong.vipcode ½á¹¹
 CREATE TABLE IF NOT EXISTS `vipcode` (
   `code` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- æ­£åœ¨å¯¼å‡ºè¡¨  huinong.vipcode çš„æ•°æ®ï¼š~5 rows (å¤§çº¦)
+-- ÕıÔÚµ¼³ö±í  huinong.vipcode µÄÊı¾İ£º~5 rows (´óÔ¼)
 /*!40000 ALTER TABLE `vipcode` DISABLE KEYS */;
 INSERT INTO `vipcode` (`code`) VALUES
 	('code1'),
