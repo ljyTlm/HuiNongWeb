@@ -10,6 +10,7 @@ function upData(){
 			        type: 'bar'
 			    }],
 			};
+		column_chart.hideLoading();
 		column_chart.setOption(option);
 	});
 	$.post("../AtyGetData", {"operation":4, "year":year, "farm":farm}, function (data) {
@@ -20,6 +21,7 @@ function upData(){
 			        type: 'line'
 			    }],
 			};
+		line_chart.hideLoading();
 		line_chart.setOption(option);
 	});
 }
@@ -58,7 +60,8 @@ $(function () {
 	        type: 'bar'
 	    }],
 	});
-   // column_chart.showLoading();
+    column_chart.showLoading();
+    line_chart.showLoading();
 	$.post("../AtyGetData",{"operation":1}, function(d) {
 		var data = $.parseJSON(d);
 		str1 = "";
