@@ -38,9 +38,15 @@ public class AtyLogin extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String username = request.getParameter("username");
 		String userpwd = request.getParameter("userpwd");
-		Integer status = DaoLogin.select(username, userpwd);
+		String operation = request.getParameter("operation");
 		HashMap<String, Integer> mp = new HashMap<>();
-		mp.put("status", status);
+		Integer status = 0;
+		if ("0".equals(operation)) {
+			status = DaoLogin.regist(username, userpwd);
+		}else if ("1".equals(operation)) {
+			status = DaoLogin.select(username, userpwd);
+		}
+		status = mp.put("status", status);
 		response.getWriter().append(JSON.toJSONString(mp));
 	}
 
