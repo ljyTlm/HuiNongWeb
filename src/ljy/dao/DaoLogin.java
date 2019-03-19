@@ -53,7 +53,7 @@ public class DaoLogin {
 		if (user.getName() != null) {
 			return 0;
 		}
-		String sql = "INSERT INTO `produce` (`name`, `passwd`, `vip`, `sorce`, `money`) VALUES ('"+username+"', '"+userpwd+"', 1, 0, 0.0)";
+		String sql = "INSERT INTO `user` (`name`, `passwd`, `vip`, `score`, `money`) VALUES ('"+username+"', '"+userpwd+"', 1, 0, 0.0)";
 		try {
 			Db.getConnection().createStatement().executeUpdate(sql);
 		} catch (SQLException e) {
